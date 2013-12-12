@@ -1,5 +1,7 @@
 language: ruby
 rvm:
   - 1.9.3
-before_script: bundle exec rake -T
-script: bundle exec rake scraper:scrape[10000]
+before_script:
+  - zeus start
+  - zeus rake -T
+script: zeus rake scraper:scrape[10000]

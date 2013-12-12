@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem 'kaminari'
 gem 'mechanize'
+gem 'zeus'
