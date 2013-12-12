@@ -2,6 +2,5 @@ language: ruby
 rvm:
   - 1.9.3
 before_script:
-  - zeus start
-  - zeus rake -T
-script: zeus rake scraper:scrape[10000]
+  - rake -T
+script: rake scraper:scrape[10000]

@@ -38,7 +38,7 @@ namespace :scraper do
   end
 
   desc "Scrape all items from QatarLiving"
-  task :scrape, :page do |t, args|
+  task :scrape, [:page] => [:environment] do |t, args|
     QatarLivingCarScraper.new(args[:page]).scrape
   end
 end

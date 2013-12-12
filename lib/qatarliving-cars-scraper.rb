@@ -1,5 +1,4 @@
 require 'scraper-base.rb'
-require 'vehicle.rb'
 
 class QatarLivingCarScraper < ScraperBase
 
