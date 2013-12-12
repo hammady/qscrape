@@ -1,0 +1,59 @@
+<h1>Listing
+<%if session[:favorites]%>
+favorite
+<%else%>
+all
+<%end%>
+vehicles</h1>
+
+<%= page_entries_info @vehicles %>
+
+<div style="float: right">
+  <form method="GET">
+    <label for="filter">Search:</label>
+    <input type=text id="filter" name="filter" value="<%=@filter%>"/>
+    <input type=submit value="Go"/>
+    <% if session[:favorites] %>
+      <%= link_to 'Show all', :toggle_favor => 'off' %>
+    <% else %>
+      <%= link_to 'Show favorites', :toggle_favor => 'on' %>
+    <% end %>
+  </form>
+</div>
+
+<table width=100%>
+  <tr>
+    <td><b>Favorite?</b></td>
+    <td><b>Title</b></td>
+    <td><b>Brand</b></td>
+    <td><b>Model</b></td>
+    <td><b>Mileage</b></td>
+    <td><b>Price</b></td>
+    <td><b>External link</b></td>
+  </tr>
+
+<% for vehicle in @vehicles %>
+  <tr <%= "class=vehicle-row-new" if not vehicle.opened?%> >
+    <td>
+      <%='YES' if vehicle.favorite %>
+    </td>
+    <td>
+      <a href="/vehicles/<%=vehicle.id%>"><%=vehicle.title%></a>
+    </td>
+    <td><%= vehicle.brand %></td>
+    <td><%= vehicle.model %></td>
+    <td><%= vehicle.mileage %></td>
+    <td><%= vehicle.price %></td>
+    <td><a target="_blank" href="<%=vehicle.url%>">Goto</a></td>
+  </tr>
+<% end %>
+</table>
+<center>
+<%= paginate @vehicles %>
+</center>
+<br />
+
+<script>
+  document.getElementById('filter').focus()
+</script>
+

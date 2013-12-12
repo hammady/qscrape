@@ -1,0 +1,4 @@
+# min		hour	day	month	weekday	command
+0,15,30,45	8-23	*	*	*	cd /home/hammady/workspace/q-scrape && rake scraper:scrape[475\ 474\ 457\ 490]
+10,25,40,55     8-23    *       *       *       cd /home/hammady/workspace/q-scrape && rake scraper:notify[lancer\ corolla\ civic\ city\ sunny]
+

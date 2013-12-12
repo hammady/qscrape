@@ -1,0 +1,56 @@
+<script type="text/javascript">
+  function saveComment() {
+    document.getElementById('commentsForm').submit()
+    return false
+  }
+  function removeComment() {
+    document.getElementById('commentsText').value = ''
+    document.getElementById('commentsForm').submit()
+    return false
+  }
+</script>
+
+<h1>
+<%=@vehicle.title%>
+[<a target="_blank" href="<%=@vehicle.url%>">Goto</a>]
+</h1>
+
+<h3><b>Submitted at:</b> <%=@vehicle.timestamp%></h3>
+
+<p><b>Brand:</b> <%=@vehicle.brand%> &nbsp;&nbsp;&nbsp;
+<b>Model:</b> <%=@vehicle.model%> &nbsp;&nbsp;&nbsp;
+<b>Mileage:</b> <%=@vehicle.mileage%></p>
+
+<p><b>Price:</b> <%=@vehicle.price%> &nbsp;&nbsp;&nbsp;
+<b>Contact number:</b> <%=@vehicle.contact_number%> &nbsp;&nbsp;&nbsp;
+<b>Vehicle type:</b> <%=@vehicle.vtype%></p>
+
+<b>Location:</b> <%=@vehicle.location%></p>
+<b>Seller:</b> <%= link_to @vehicle.username, "http://www.qatarliving.com/user/#{@vehicle.username}", target: '_blank' %></p>
+
+<p>
+  <b>Description:</b> <br/>
+  <%=@vehicle.description.html_safe rescue 'None' %>
+</p>
+<p>
+  <b>Comments:</b>
+  <a href="#" onclick="return saveComment()">Save</a>
+  -
+  <a href="#" onclick="return removeComment()">Remove</a>
+  <br/>
+  <%= form_for @vehicle, method: "POST", url: comment_vehicle_path(@vehicle), html: {id: 'commentsForm'} do |f| %>
+    <textarea id="commentsText" name="text" rows=2 cols=120><%=@vehicle.comments%></textarea>
+  <% end %>
+</p>
+
+<h3>
+<%if @vehicle.favorite%>
+  <%= link_to 'Remove from favorites', favor_vehicle_path(@vehicle) %>
+<%else%>
+  <%= link_to 'Add to favorites', favor_vehicle_path(@vehicle) %>
+<%end%>
+
+</h3>
+
+<%= link_to 'Back', :action => 'index' %>
+
