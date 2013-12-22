@@ -1,4 +1,5 @@
 require "qatarliving-cars-scraper.rb"
+require "qatarsale-cars-scraper.rb"
 
 def validate_brands(brands)
   if not brands.match(/^[\d ]+$/)
@@ -38,7 +39,12 @@ namespace :scraper do
   end
 
   desc "Scrape all items from QatarLiving"
-  task :scrape, [:page] => [:environment] do |t, args|
+  task :scrape_ql, [:page] => [:environment] do |t, args|
     QatarLivingCarScraper.new(args[:page]).scrape
+  end
+
+  desc "Scrape all items from QatarSale"
+  task :scrape_qs, [:page] => [:environment] do |t, args|
+    QatarSaleCarScraper.new.scrape
   end
 end

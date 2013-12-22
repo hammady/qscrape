@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210104524) do
+ActiveRecord::Schema.define(:version => 20131222075823) do
 
   create_table "brands", :force => true do |t|
     t.text "name"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20131210104524) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "classname"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "vehicles", :force => true do |t|
@@ -39,12 +47,32 @@ ActiveRecord::Schema.define(:version => 20131210104524) do
     t.datetime "viewed_at"
     t.boolean  "favorite"
     t.text     "comments"
-    t.string   "[:location, :username]"
     t.string   "location"
     t.string   "username"
     t.datetime "timestamp"
+    t.string   "class_name"
+    t.string   "trim_name"
+    t.string   "outside_color"
+    t.string   "gear"
+    t.integer  "cylinders"
+    t.string   "inside_color"
+    t.string   "inside_type"
+    t.boolean  "sunroof"
+    t.boolean  "sensors"
+    t.boolean  "camera"
+    t.boolean  "dvd"
+    t.boolean  "cd"
+    t.boolean  "bluetooth"
+    t.boolean  "gps"
+    t.string   "contact_number2"
+    t.integer  "source_id"
+    t.integer  "sid_i"
+    t.string   "sid_s"
   end
 
+  add_index "vehicles", ["sid_i"], :name => "index_vehicles_on_sid_i"
+  add_index "vehicles", ["sid_s"], :name => "index_vehicles_on_sid_s"
+  add_index "vehicles", ["source_id"], :name => "index_vehicles_on_source_id"
   add_index "vehicles", ["url"], :name => "index_vehicles_on_url", :unique => true
 
 end

@@ -61,3 +61,8 @@ Brand.create [
   {id: 491, name: "Volkswagen"},
   {id: 492, name: "Volvo"}
 ]
+
+Source.create [
+  {name: 'Qatar Living', url: 'http://www.qatarliving.com/', classname: 'QatarLivingCarScraper'},
+  {name: 'Qatar Sale', url: 'http://www.qatarsale.com/', classname: 'QatarSaleCarScraper'}
+]

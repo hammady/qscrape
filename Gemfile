@@ -38,4 +38,6 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'kaminari'
+gem 'typhoeus'
+gem 'nokogiri'
 gem 'mechanize'

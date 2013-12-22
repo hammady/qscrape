@@ -8,11 +8,15 @@ There are also 2 rake tasks to scrape and notify, respectively.
 
 == Scraping
 
-  rake scraper:scrape
+  rake scraper:scrape_ql  # QatarLiving
 
 or to scrape from a specific page (0 based index):
 
-  rake scraper:scrape[99] # starts from page 100
+  rake scraper:scrape_ql[99] # starts from page 100
+
+To scrape from QatarSale:
+
+  rake scraper:scrape_qs  # QatarSale
 
 == Notifying
 

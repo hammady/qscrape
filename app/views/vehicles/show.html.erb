@@ -17,16 +17,40 @@
 
 <h3><b>Submitted at:</b> <%=@vehicle.timestamp%></h3>
 
-<p><b>Brand:</b> <%=@vehicle.brand%> &nbsp;&nbsp;&nbsp;
-<b>Model:</b> <%=@vehicle.model%> &nbsp;&nbsp;&nbsp;
-<b>Mileage:</b> <%=@vehicle.mileage%></p>
+<p>
+<b>Brand:</b> <%=@vehicle.brand%> <%= @vehicle.class_name %> <%= @vehicle.trim_name %> &nbsp;&nbsp;
+<b>Model:</b> <%=@vehicle.model%> &nbsp;&nbsp;
+<b>Mileage:</b> <%=@vehicle.mileage%>
+</p>
 
-<p><b>Price:</b> <%=@vehicle.price%> &nbsp;&nbsp;&nbsp;
-<b>Contact number:</b> <%=@vehicle.contact_number%> &nbsp;&nbsp;&nbsp;
-<b>Vehicle type:</b> <%=@vehicle.vtype%></p>
+<p>
+<b>Price:</b> <%=@vehicle.price%> &nbsp;&nbsp;&nbsp;
+<b>Contact number(s):</b> <%=[@vehicle.contact_number, @vehicle.contact_number2].compact.join(', ')%> &nbsp;&nbsp;&nbsp;
+<b>Vehicle type:</b> <%=@vehicle.vtype%>
+</p>
 
-<b>Location:</b> <%=@vehicle.location%></p>
-<b>Seller:</b> <%= link_to @vehicle.username, "http://www.qatarliving.com/user/#{@vehicle.username}", target: '_blank' %></p>
+<p>
+<b>Location:</b> <%=@vehicle.location%> &nbsp;&nbsp;
+<b>Seller:</b> <%= @vehicle.username %>
+</p>
+
+<p>
+<b>Specs:</b>
+<ul>
+  <li>Outside color: <%= @vehicle.outside_color.nil? ? 'N/A' : @vehicle.outside_color %></li>
+  <li>Gear: <%= @vehicle.gear.nil? ? 'N/A' : @vehicle.gear %></li>
+  <li>Cylinders: <%= @vehicle.cylinders.nil? ? 'N/A' : @vehicle.cylinders %></li>
+  <li>Inside color: <%= @vehicle.inside_color.nil? ? 'N/A' : @vehicle.inside_color %></li>
+  <li>Inside type: <%= @vehicle.inside_type.nil? ? 'N/A' : @vehicle.inside_type %></li>
+  <li>Sunroof: <%= @vehicle.sunroof.nil? ? 'N/A' : (@vehicle.sunroof ? 'Yes' : 'No') %></li>
+  <li>Sensors: <%= @vehicle.sensors.nil? ? 'N/A' : (@vehicle.sensors ? 'Yes' : 'No') %></li>
+  <li>Camera: <%= @vehicle.camera.nil? ? 'N/A' : (@vehicle.camera ? 'Yes' : 'No') %></li>
+  <li>DVD: <%= @vehicle.dvd.nil? ? 'N/A' : (@vehicle.dvd ? 'Yes' : 'No') %></li>
+  <li>CD: <%= @vehicle.cd.nil? ? 'N/A' : (@vehicle.cd ? 'Yes' : 'No') %></li>
+  <li>Bluetooth: <%= @vehicle.bluetooth.nil? ? 'N/A' : (@vehicle.bluetooth ? 'Yes' : 'No') %></li>
+  <li>GPS: <%= @vehicle.gps.nil? ? 'N/A' : (@vehicle.gps ? 'Yes' : 'No') %></li>
+</ul>
+</p>
 
 <p>
   <b>Description:</b> <br/>

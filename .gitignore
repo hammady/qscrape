@@ -14,3 +14,7 @@
 log/*
 /tmp
 *.sublime-workspace
+db/development.sqlite3.qatarliving
+db/development.sqlite3.qatarsale
+*.gz
+q-scrape.sublime-project
