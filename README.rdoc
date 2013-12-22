@@ -2,6 +2,8 @@ Qscrape is a Ruby on Rails app that scrapes vehicle classified ads from websited
 It comes with a web interface to visualize ads, search in them, favorite and comment on any.
 There are also 2 rake tasks to scrape and notify, respectively.
 
+{<img src="https://travis-ci.org/hammady/qscrape.png" />}[https://travis-ci.org/hammady/qscrape]
+
 == Installation
 
   bundle
