@@ -2,5 +2,5 @@ language: ruby
 rvm:
   - 1.9.3
 before_script:
-  - rake -T
+  - rake db:migrate
 script: rake scraper:scrape_ql[10000]
