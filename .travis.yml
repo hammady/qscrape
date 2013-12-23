@@ -3,4 +3,4 @@ rvm:
   - 1.9.3
 before_script:
   - rake -T
-script: rake scraper:scrape[10000]
+script: rake scraper:scrape_ql[10000]
