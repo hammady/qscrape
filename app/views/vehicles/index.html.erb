@@ -24,6 +24,8 @@ vehicles</h1>
 <table width=100%>
   <tr>
     <td><b>Favorite?</b></td>
+    <td><b>Duplicates</b></td>
+    <td><b>Source</b></td>
     <td><b>Title</b></td>
     <td><b>Brand</b></td>
     <td><b>Model</b></td>
@@ -38,9 +40,15 @@ vehicles</h1>
       <%='YES' if vehicle.favorite %>
     </td>
     <td>
+      <%= link_to (vehicle.duplicate_group ? vehicle.duplicates_count : '-'), vehicles_path + "?duplicate_group=#{vehicle.duplicate_group}" %>
+    </td>
+    <td>
+      <%= vehicle.source %>
+    </td>
+    <td>
       <a href="/vehicles/<%=vehicle.id%>"><%=vehicle.title%></a>
     </td>
-    <td><%= vehicle.brand %></td>
+    <td><%= vehicle.brand_name %></td>
     <td><%= vehicle.model %></td>
     <td><%= vehicle.mileage %></td>
     <td><%= vehicle.price %></td>

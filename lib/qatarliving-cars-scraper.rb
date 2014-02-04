@@ -2,11 +2,9 @@ require 'scraper-base.rb'
 
 class QatarLivingCarScraper < ScraperBase
 
-  attr_reader :brand
   
   def initialize(page = 0)
     super('log/qatarliving.log', page)
-    @brand = brand
 	  @site_id = 'qatarlivingcars'
 		@remoteBaseURL = 'http://www.qatarliving.com'
 		@startURL = "/classifieds/search?f%5B0%5D=im_cl_category%3A100556&page=#{page}"
@@ -103,7 +101,7 @@ class QatarLivingCarScraper < ScraperBase
         when "year model"
           vehicle.model = val
         when "vehicle make"
-          vehicle.brand = Brand.where(name: val).first_or_create
+          vehicle.brand_name = val
         when "vehicle mileage"
           vehicle.mileage = val
         end
@@ -111,6 +109,11 @@ class QatarLivingCarScraper < ScraperBase
       
       # description
       vehicle.description = node_html(page, ".//div[@class='field field-name-body field-type-text-with-summary field-label-hidden field-item even']")
+
+      # images
+      (page/"//figure[@class='field field-group-field-image']//a").each do |anchor|
+        vehicle.images.build url: anchor['href']
+      end
 
       yield vehicle
     end

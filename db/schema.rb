@@ -11,18 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222075823) do
+ActiveRecord::Schema.define(:version => 20140204130420) do
 
   create_table "brands", :force => true do |t|
     t.text "name"
   end
 
-  create_table "recipients", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "images", :force => true do |t|
+    t.string   "url"
+    t.integer  "vehicle_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  add_index "images", ["vehicle_id"], :name => "index_images_on_vehicle_id"
 
   create_table "sources", :force => true do |t|
     t.string   "name"
@@ -51,10 +53,10 @@ ActiveRecord::Schema.define(:version => 20131222075823) do
     t.string   "username"
     t.datetime "timestamp"
     t.string   "class_name"
-    t.string   "trim_name"
     t.string   "outside_color"
     t.string   "gear"
     t.integer  "cylinders"
+    t.string   "drive_train"
     t.string   "inside_color"
     t.string   "inside_type"
     t.boolean  "sunroof"
@@ -68,8 +70,12 @@ ActiveRecord::Schema.define(:version => 20131222075823) do
     t.integer  "source_id"
     t.integer  "sid_i"
     t.string   "sid_s"
+    t.string   "trim_name"
+    t.integer  "duplicate_group"
+    t.string   "brand_name"
   end
 
+  add_index "vehicles", ["duplicate_group"], :name => "index_vehicles_on_duplicate_group"
   add_index "vehicles", ["sid_i"], :name => "index_vehicles_on_sid_i"
   add_index "vehicles", ["sid_s"], :name => "index_vehicles_on_sid_s"
   add_index "vehicles", ["source_id"], :name => "index_vehicles_on_source_id"

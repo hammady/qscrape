@@ -2,12 +2,10 @@ require 'scraper-base.rb'
 
 class QatarSaleCarScraper < ScraperBase
 
-  attr_reader :brand
   attr_accessor :form_params
   
   def initialize(page = 0)
     super('log/qatarsale.log', page)
-    @brand = brand
     @site_id = 'qatarsalecars'
     @remoteBaseURL = 'http://qatarsale.com'
     @startURL = "/EnMain.aspx"
@@ -101,7 +99,7 @@ class QatarSaleCarScraper < ScraperBase
 
   def scrape
     super do
-      max_id = Vehicle.order("sid_i desc").first
+      max_id = Vehicle.where(source_id: @source.id).order("sid_i desc").first
 
       @hercules.restart
 
@@ -163,7 +161,7 @@ class QatarSaleCarScraper < ScraperBase
 
       unless page.at("//div[@id='LOGOPANEL']")
         vehicle.title = node_text(page, "//head/title")
-        vehicle.brand = Brand.where(name: get_string(page, 'd_carname')).first_or_create
+        vehicle.brand_name = get_string(page, 'd_carname')
         vehicle.model = get_integer(page, 'd_year')
         vehicle.class_name = get_string(page, 'd_classname')
         vehicle.trim_name = get_string(page, 'd_modelname')
@@ -187,6 +185,20 @@ class QatarSaleCarScraper < ScraperBase
         vehicle.contact_number2 = get_string(page, 'd_contact2')
         seller = page.at("//a[@id='d_seller2']") || page.at("//span[@id='d_seller4']")
         vehicle.username = seller.text.strip if seller
+
+        # thumbnails:
+        # img = page.at("//img[@id='BIGIMAGE']")
+        # puts img['src'] if img
+        # vehicle.images.build url: img['src'] if img
+
+        1.upto(6){|i|
+          if img = page.at("//input[@id='img#{i}']")
+            m = img['src'].match(/(.*)t\.(.+)/)
+            url = m ? "#{m[1]}.#{m[2]}" : img['src']
+            vehicle.images.build url: url
+          end
+        }
+
         yield vehicle
       else
         @logger.info "Vehicle with url #{vehicle.url} removed from website"

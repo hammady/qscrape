@@ -15,10 +15,18 @@
 [<a target="_blank" href="<%=@vehicle.url%>">Goto</a>]
 </h1>
 
+<div style="float: right">
+  <% @vehicle.images.each do |image| %>
+    <div>
+      <img src="<%=image.url%>"/>
+    </div>
+  <% end %>
+</div>
+
 <h3><b>Submitted at:</b> <%=@vehicle.timestamp%></h3>
 
 <p>
-<b>Brand:</b> <%=@vehicle.brand%> <%= @vehicle.class_name %> <%= @vehicle.trim_name %> &nbsp;&nbsp;
+<b>Brand:</b> <%=@vehicle.brand_name%> <%= @vehicle.class_name %> <%= @vehicle.trim_name %> &nbsp;&nbsp;
 <b>Model:</b> <%=@vehicle.model%> &nbsp;&nbsp;
 <b>Mileage:</b> <%=@vehicle.mileage%>
 </p>

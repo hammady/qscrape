@@ -33,6 +33,8 @@ class VehiclesController < ApplicationController
     
     @vehicles = Vehicle.where(conditions)
     @vehicles = @vehicles.where(:favorite => true) if session[:favorites]
+    @vehicles = @vehicles.where(:duplicate_group => params[:duplicate_group]) if params[:duplicate_group]
+    @page = 1 if params[:duplicate_group]
     @vehicles = @vehicles.order("id DESC").page(@page).per(25)
 
     respond_to do |format|
