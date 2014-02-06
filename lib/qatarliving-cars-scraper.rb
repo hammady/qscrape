@@ -47,20 +47,22 @@ class QatarLivingCarScraper < ScraperBase
     @hercules.fight(items) do |li|
       v = Vehicle.new
       anchor = li.at(".//h3[@class='title']/a")
-      v.title = anchor.text
-      pline "  Item #{@curr_property} of #{@total}..."
-      # get detailed info
-      href = anchor['href']
-      v.url = "#{@remoteBaseURL}#{href}"
-      #puts "processing: #{anchor.text} [#{href}]"
-      arr = node_text(li, ".//h4[@class='title']").split(/\s*in\s*/)
-      v.vtype = arr[0]
-      v.location = arr[1]
-      unless Vehicle.find_by_url(v.url)
-        new_items_found = true
-        process_detail_page(v) do |v|
-          v.source = @source
-          v.save
+      if anchor
+        v.title = anchor.text
+        pline "  Item #{@curr_property} of #{@total}..."
+        # get detailed info
+        href = anchor['href']
+        v.url = "#{@remoteBaseURL}#{href}"
+        #puts "processing: #{anchor.text} [#{href}]"
+        arr = node_text(li, ".//h4[@class='title']").split(/\s*in\s*/)
+        v.vtype = arr[0]
+        v.location = arr[1]
+        unless Vehicle.find_by_url(v.url)
+          new_items_found = true
+          process_detail_page(v) do |v|
+            v.source = @source
+            v.save
+          end
         end
       end
       @curr_property = @curr_property + 1
